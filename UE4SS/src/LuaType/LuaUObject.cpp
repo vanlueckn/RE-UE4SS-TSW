@@ -1162,6 +1162,36 @@ namespace RC::LuaType
         params.lua.throw_error(fmt::format("[push_softclassproperty] Unknown Operation ({}) not supported", static_cast<int32_t>(params.operation)));
     }
 
+    auto push_softobjectproperty(const PusherParams& params) -> void
+    {
+        auto soft_ptr = static_cast<Unreal::FSoftObjectPtr*>(params.data);
+        if (!soft_ptr)
+        {
+            params.lua.throw_error("[push_softobjectproperty] data pointer is nullptr");
+        }
+
+        switch (params.operation)
+        {
+        case Operation::GetNonTrivialLocal:
+        case Operation::Get:
+            LuaType::TSoftObjectPtr::construct(params.lua, *soft_ptr);
+            return;
+        case Operation::Set: {
+            auto& lua_object = params.lua.get_userdata<LuaType::TSoftClassPtr>(params.stored_at_index);
+            *soft_ptr = lua_object.get_local_cpp_object();
+            return;
+        }
+        case Operation::GetParam:
+            RemoteUnrealParam::construct(params.lua, params.data, params.base, params.property);
+            return;
+        default:
+            params.lua.throw_error("[push_softclassproperty] Unhandled Operation");
+            break;
+        }
+
+        params.lua.throw_error(fmt::format("[push_softclassproperty] Unknown Operation ({}) not supported", static_cast<int32_t>(params.operation)));
+    }
+
     auto push_interfaceproperty(const PusherParams& params) -> void
     {
         auto property_value = static_cast<Unreal::UInterface**>(params.data);

@@ -961,6 +961,7 @@ namespace RC
     auto UE4SSProgram::setup_unreal_properties() -> void
     {
         LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("ObjectProperty")).GetComparisonIndex(), &LuaType::push_objectproperty);
+        LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("ObjectPtrProperty")).GetComparisonIndex(), &LuaType::push_objectproperty);
         LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("ClassProperty")).GetComparisonIndex(), &LuaType::push_classproperty);
         LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("Int8Property")).GetComparisonIndex(), &LuaType::push_int8property);
         LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("Int16Property")).GetComparisonIndex(), &LuaType::push_int16property);
@@ -981,6 +982,7 @@ namespace RC
         LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("TextProperty")).GetComparisonIndex(), &LuaType::push_textproperty);
         LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("StrProperty")).GetComparisonIndex(), &LuaType::push_strproperty);
         LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("SoftClassProperty")).GetComparisonIndex(), &LuaType::push_softclassproperty);
+        LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("SoftObjectProperty")).GetComparisonIndex(), &LuaType::push_softclassproperty);
         LuaType::StaticState::m_property_value_pushers.emplace(FName(STR("InterfaceProperty")).GetComparisonIndex(), &LuaType::push_interfaceproperty);
     }
 
