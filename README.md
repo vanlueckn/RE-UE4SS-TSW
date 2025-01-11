@@ -1,4 +1,4 @@
-# Unreal Engine 4/5 Scripting System
+# UE4SS fork for Train Sim World 5
 
 Lua scripting system platform, C++ Modding API, SDK generator, blueprint mod loader, live property editor and other dumping utilities for UE4/5 games.
 
